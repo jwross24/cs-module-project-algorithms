@@ -1,16 +1,40 @@
-'''
-Input: a List of integers
-Returns: a List of integers
-'''
 def product_of_all_other_numbers(arr):
+    '''
+    Input: a List of integers
+    Returns: a List of integers
+    '''
     # Your code here
+    # Length of the input array
+    length = len(arr)
 
-    pass
+    L = [0]*length
+    R = [0]*length
+
+    # The answer array that we return
+    answer = [0]*length
+
+    # L[i] holds the product of all the elements to the left
+    L[0] = 1  # no elements to the left, so product is 1
+    for i in range(1, length):
+        L[i] = arr[i - 1] * L[i - 1]
+
+    # R[i] holds the product of all the elements to the right
+    R[length - 1] = 1  # no elements to the right, so product is 1
+    for i in reversed(range(length-1)):  # range(length - 2, -1, -1)
+        R[i] = arr[i + 1] * R[i + 1]
+
+    # Construct the answer array
+    for i in range(length):
+        answer[i] = L[i] * R[i]
+
+    return answer
 
 
 if __name__ == '__main__':
     # Use the main function to test your implementation
     # arr = [1, 2, 3, 4, 5]
-    arr = [2, 6, 9, 8, 2, 2, 9, 10, 7, 4, 7, 1, 9, 5, 9, 1, 8, 1, 8, 6, 2, 6, 4, 8, 9, 5, 4, 9, 10, 3, 9, 1, 9, 2, 6, 8, 5, 5, 4, 7, 7, 5, 8, 1, 6, 5, 1, 7, 7, 8]
+    arr = [2, 6, 9, 8, 2, 2, 9, 10, 7, 4, 7, 1, 9, 5, 9, 1, 8, 1, 8, 6, 2, 6, 4, 8,
+           9, 5, 4, 9, 10, 3, 9, 1, 9, 2, 6, 8, 5, 5, 4, 7, 7, 5, 8, 1, 6, 5, 1, 7, 7, 8]
 
-    print(f"Output of product_of_all_other_numbers: {product_of_all_other_numbers(arr)}")
+    print(
+        f"Output of product_of_all_other_numbers: {product_of_all_other_numbers(arr)}")
