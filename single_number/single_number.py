@@ -1,11 +1,30 @@
-'''
-Input: a List of integers where every int except one shows up twice
-Returns: an integer
-'''
-def single_number(arr):
-    # Your code here
+from functools import reduce
 
-    pass
+
+def single_number(arr):
+    '''
+    Input: a List of integers where every int except one shows up twice
+    Returns: an integer
+    '''
+    # Your code here
+    return reduce(lambda x, y: x ^ y, arr)
+
+
+# def single_number(arr):
+#     '''
+#     Input: a List of integers where every int except one shows up twice
+#     Returns: an integer
+#     '''
+#     # Your code here
+#     seen = set()
+
+#     for num in arr:
+#         if num in seen:
+#             seen.remove(num)
+#         else:
+#             seen.add(num)
+
+#     return seen.pop()
 
 
 if __name__ == '__main__':
