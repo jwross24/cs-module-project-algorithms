@@ -7,25 +7,21 @@ def product_of_all_other_numbers(arr):
     # Length of the input array
     length = len(arr)
 
-    L = [0]*length
-    R = [0]*length
-
     # The answer array that we return
     answer = [0]*length
 
-    # L[i] holds the product of all the elements to the left
-    L[0] = 1  # no elements to the left, so product is 1
+    # answer[i] holds the product of all the elements to the left
+    answer[0] = 1  # no elements to the left, so product is 1
     for i in range(1, length):
-        L[i] = arr[i - 1] * L[i - 1]
+        answer[i] = arr[i - 1] * answer[i - 1]
 
-    # R[i] holds the product of all the elements to the right
-    R[length - 1] = 1  # no elements to the right, so product is 1
-    for i in reversed(range(length-1)):  # range(length - 2, -1, -1)
-        R[i] = arr[i + 1] * R[i + 1]
-
-    # Construct the answer array
-    for i in range(length):
-        answer[i] = L[i] * R[i]
+    # This solution uses O(1) space and calculates R on-the-fly
+    # R holds the product of all the elements to the right
+    R = 1  # no elements to the right, so product is 1
+    for i in reversed(range(length)):  # range(length - 1, -1, -1)
+        answer[i] = answer[i] * R
+        # Update R
+        R *= arr[i]
 
     return answer
 
